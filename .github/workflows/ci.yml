@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  benchmark:
+    name: benchmark
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: uname -a
+        run: uname -a
+
+      - name: install required packages
+        run: sudo apt-get update && sudo apt-get install -y hyperfine
+
+      - name: prepare fastfetch
+        run: |
+          wget https://github.com/fastfetch-cli/fastfetch/releases/download/2.9.2/fastfetch-linux-amd64.tar.gz
+          tar zxvf fastfetch-linux-amd64.tar.gz
+          mv fastfetch-linux-amd64/usr/bin/fastfetch fastfetch
+          ./fastfetch --version
+
+      - name: prepare crabfetch
+        run: |
+          wget https://github.com/LivacoNew/CrabFetch/releases/download/v0.1.1/crabfetch-x86_64
+          chmod +x crabfetch-x86_64
+          mv crabfetch-x86_64 ./crabfetch
+          ./crabfetch --version
+
+      - name: run fastfetch
+        run: ./fastfetch -c none -s 'title:separator:cpu:gpu:memory:swap:disk:host:display:os:kernel:packages:de:terminal:shell:uptime:break:colors' --packages-disabled 'APK:BREW:CHOCO:EMERGE:EOPKG:NIX:OPKG:PALUDIS:PKG:PKGTOOL:MACPORTS:RPM:SCOOP:SNAP:WINGET:XBPS:AM' --ds-force-drm --stat
+
+      - name: run crabfetch
+        run: ./crabfetch
+
+      - name: run hyperfine
+        run: hyperfine -w 2 "./fastfetch -c none -s 'title:separator:cpu:gpu:memory:swap:disk:host:display:os:kernel:packages:de:terminal:shell:uptime:break:colors' --packages-disabled 'APK:BREW:CHOCO:EMERGE:EOPKG:NIX:OPKG:PALUDIS:PKG:PKGTOOL:MACPORTS:RPM:SCOOP:SNAP:WINGET:XBPS:AM' --ds-force-drm" "./crabfetch"
