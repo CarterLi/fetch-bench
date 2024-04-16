@@ -35,6 +35,9 @@ jobs:
           mv crabfetch-x86_64 ./crabfetch
           ./crabfetch --version
 
+      - name: run fastfetch --format json
+        run: ./fastfetch -c none -s 'title:separator:cpu:gpu:memory:swap:disk:host:display:os:kernel:packages:de:terminal:shell:uptime:break:colors' --packages-disabled 'APK:BREW:CHOCO:EMERGE:EOPKG:NIX:OPKG:PALUDIS:PKG:PKGTOOL:MACPORTS:RPM:SCOOP:SNAP:WINGET:XBPS:AM' --ds-force-drm --logo-separate --pipe false --format json
+
       - name: run fastfetch
         run: ./fastfetch -c none -s 'title:separator:cpu:gpu:memory:swap:disk:host:display:os:kernel:packages:de:terminal:shell:uptime:break:colors' --packages-disabled 'APK:BREW:CHOCO:EMERGE:EOPKG:NIX:OPKG:PALUDIS:PKG:PKGTOOL:MACPORTS:RPM:SCOOP:SNAP:WINGET:XBPS:AM' --ds-force-drm --logo-separate --pipe false
 
