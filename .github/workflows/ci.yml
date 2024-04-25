@@ -36,10 +36,10 @@ jobs:
           ./crabfetch --version
 
       - name: run fastfetch
-        run: ./fastfetch -c none -s 'title:separator:cpu:gpu:memory:swap:disk:host:display:os:kernel:packages:de:terminal:shell:uptime:break:colors' --packages-disabled 'APK:BREW:CHOCO:EMERGE:EOPKG:NIX:OPKG:PALUDIS:PKG:PKGTOOL:MACPORTS:SCOOP:SNAP:WINGET:XBPS:AM' --ds-force-drm --show-errors
+        run: ./fastfetch -c none -s 'title:separator:cpu:gpu:memory:swap:disk:host:display:os:kernel:packages:de:terminal:shell:uptime:break:colors' --packages-disabled 'APK:BREW:CHOCO:EMERGE:EOPKG:NIX:OPKG:PALUDIS:PKG:PKGTOOL:MACPORTS:SCOOP:SNAP:WINGET:XBPS:AM --ts-version false' --ds-force-drm --show-errors
 
       - name: run crabfetch
         run: ./crabfetch
 
       - name: run hyperfine
-        run: hyperfine -w 5 "./fastfetch -c none -s 'title:separator:cpu:gpu:memory:swap:disk:host:display:os:kernel:packages:de:terminal:shell:uptime:break:colors' --packages-disabled 'APK:BREW:CHOCO:EMERGE:EOPKG:NIX:OPKG:PALUDIS:PKG:PKGTOOL:MACPORTS:SCOOP:SNAP:WINGET:XBPS:AM' --ds-force-drm" "./crabfetch"
+        run: hyperfine -w 5 "./fastfetch -c none -s 'title:separator:cpu:gpu:memory:swap:disk:host:display:os:kernel:packages:de:terminal:shell:uptime:break:colors' --packages-disabled 'APK:BREW:CHOCO:EMERGE:EOPKG:NIX:OPKG:PALUDIS:PKG:PKGTOOL:MACPORTS:SCOOP:SNAP:WINGET:XBPS:AM' --ds-force-drm --ts-version false" "./crabfetch"
