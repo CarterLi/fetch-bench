@@ -30,9 +30,8 @@ jobs:
 
       - name: prepare crabfetch
         run: |
-          wget https://github.com/LivacoNew/CrabFetch/releases/download/v0.3.0/crabfetch-x86_64
-          chmod +x crabfetch-x86_64
-          mv crabfetch-x86_64 ./crabfetch
+          wget https://github.com/LivacoNew/CrabFetch/releases/download/v0.3.0/crabfetch-amd64 -o crabfetch
+          chmod +x crabfetch
           ./crabfetch --version
 
       - name: run fastfetch
