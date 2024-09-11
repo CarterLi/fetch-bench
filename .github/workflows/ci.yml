@@ -23,7 +23,7 @@ jobs:
 
       - name: prepare fastfetch
         run: |
-          wget https://github.com/fastfetch-cli/fastfetch/releases/download/2.22.0/fastfetch-linux-amd64.tar.gz
+          wget https://github.com/fastfetch-cli/fastfetch/releases/download/2.24.0/fastfetch-linux-amd64.tar.gz
           tar zxvf fastfetch-linux-amd64.tar.gz
           mv fastfetch-linux-amd64/usr/bin/fastfetch fastfetch
           ./fastfetch --version
