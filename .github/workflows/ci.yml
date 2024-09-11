@@ -38,6 +38,9 @@ jobs:
       - name: run fastfetch
         run: ./fastfetch -c none -s 'title:separator:cpu:gpu:memory:swap:disk:host:display:os:kernel:packages:de:terminal:shell:battery:editor:uptime:locale:media:initsystem:processes:break:colors' --packages-disabled 'APK:BREW:CHOCO:EMERGE:EOPKG:NIX:OPKG:PALUDIS:PKG:PKGTOOL:MACPORTS:SCOOP:SNAP:WINGET:XBPS:AM' --ds-force-drm sys-only --show-errors
 
+      - name: run fastfetch -json
+        run: ./fastfetch -c none --format json --stat -s 'title:separator:cpu:gpu:memory:swap:disk:host:display:os:kernel:packages:de:terminal:shell:battery:editor:uptime:locale:media:initsystem:processes:break:colors' --packages-disabled 'APK:BREW:CHOCO:EMERGE:EOPKG:NIX:OPKG:PALUDIS:PKG:PKGTOOL:MACPORTS:SCOOP:SNAP:WINGET:XBPS:AM' --ds-force-drm sys-only --show-errors
+
       - name: run crabfetch
         run: ./crabfetch
 
